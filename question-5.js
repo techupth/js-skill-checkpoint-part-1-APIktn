@@ -19,3 +19,23 @@ const products = [
 
 const promotionCode = "";
 // เริ่มเขียนโค้ดตรงนี้
+
+function calculateTotalPrice(products, promotionCode) {
+  let sumProduct = products.reduce((acc, cur) => {
+    return acc + cur.price * cur.quantity;
+  }, 0);
+  let discounted = (sumProduct, promotionCode) => {
+    if (promotionCode === "SALE20") {
+      return sumProduct - (sumProduct * 20) / 100;
+    } else if (promotionCode === "SALE50") {
+      return sumProduct - (sumProduct * 50) / 100;
+    } else {
+      return sumProduct;
+    }
+  };
+  return discounted(sumProduct, promotionCode);
+}
+
+console.log(calculateTotalPrice(products));
+console.log(calculateTotalPrice(products, "SALE20"));
+console.log(calculateTotalPrice(products, "SALE50"));
